@@ -11,7 +11,7 @@ int main()
 
     //int color_code = mapping_color_color_codes.at("Red");
 
-    Write(5,5,"Red","MARI");
+    Write(5,5,"Red","MARIA");
     cout<<"new text"<<endl;
 
     return 0;

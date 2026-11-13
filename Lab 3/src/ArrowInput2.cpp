@@ -1,8 +1,14 @@
 #include <iostream>   // Standard input/output library
 #include <cstdio>     // C standard I/O functions such as printf
-#include <unistd.h>   // Provides Unix functions such as read
-#include <termios.h>  // Used to control terminal settings
 
+#ifdef _WIN32
+    #include <conio.h>
+#else // Linux specific libs ========
+    #include <unistd.h> // Provides Unix functions such as read
+    #include <termios.h>  // Used to control terminal settings
+#endif
+
+#ifndef _WIN32 // Linux func =======
 // Alternative implementation of getch() for Linux systems
 char getch_linux() {
     char buf = 0; // Variable to store the input character
@@ -42,15 +48,34 @@ char getch_linux() {
     // Return the character that was read
     return buf;
 }
+#endif
 
 // 1 -> up arrow
 // 2 -> down arrow
 // 3 -> enter
-// 4 -> esc
+// 4 -> home
+// 5 -> other key
+// 6 -> end
 
 int DetermineArrow()
 {
+    #ifdef _WIN32
+    int c = _getch();
 
+    if (c == '\r') return 3;      // Enter
+    if (c == 27)   return 7;      // Esc
+
+    if (c == 0 || c == 0xE0) {    // special-key prefix
+        switch (_getch()) {
+            case 72: return 1;    // Up
+            case 80: return 2;    // Down
+            case 71: return 4;    // Home
+            case 79: return 6;    // End
+            default: return 5;
+        }
+    }
+    return -1;
+    #else
     //std::printf("Press the arrow keys to test the program (press 'q' to quit):\n");
     char byte1='q';
     char byte2='q';
@@ -75,17 +100,15 @@ int DetermineArrow()
         // The third character determines the arrow direction
         //std::cout<<"Byte 3 :: "<<byte3<<std::endl;
         switch (byte3) {
-            case 'A':
-                //std::printf("↑ Up Arrow\n");
+            case 'A': // up
                 return 1;
-            case 'B':
-                //std::printf("↓ Down Arrow\n");
+            case 'B': // down
                 return 2;
-            case 'H':
+            case 'H': // home
                 return 4;
-            case 'F':
+            case 'F': //end
                 return 6;
-            default:
+            default: // else -> ignore
                 return 5;
         }
     }
@@ -93,6 +116,7 @@ int DetermineArrow()
     //std::cout<<"================================="<<std::endl;
 
     return -1;
+    #endif
 }
 
 // int main() {
