@@ -26,7 +26,9 @@ struct S_Employee
        
     void SetName(char * name)
     {
-        this->name = StringCopy(name);
+        char* newName = StringCopy(name);
+        delete[] this->name;
+        this->name = newName;
     }
     void SetAge(int age)
     {
@@ -51,5 +53,24 @@ struct S_Employee
     double GetSalary()
     {
         return salary;
+    }
+
+    S_Employee& operator=(const S_Employee& other)
+    {
+     
+        char* newName = StringCopy(other.name);
+
+        delete[] name;
+
+        name = newName;
+        age = other.age;
+        salary = other.salary;
+        
+        return *this;
+    }
+
+    ~S_Employee()
+    {
+        delete[] name;
     }
 };

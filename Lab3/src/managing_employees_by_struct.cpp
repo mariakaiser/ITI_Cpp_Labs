@@ -11,6 +11,7 @@ void InitDynamicEmplyeeArr()
     S_employees = new S_Employee[S_MaxEmployees]; // creates size Employee struct each called by the default constructor
 }
 
+
 void CopyingInBiggerArr()
 {
     
@@ -18,10 +19,10 @@ void CopyingInBiggerArr()
 
     for(int i =0;i<S_MaxEmployees;i++)
     {
-        S_employees_Copy[i] = S_employees[i];
+        S_employees_Copy[i] = S_employees[i]; // shallow copying of name char arr
     }
 
-    delete[] S_employees;
+    delete[] S_employees; // but does it delete the char arr?
 
     S_employees = S_employees_Copy;
 
@@ -55,4 +56,10 @@ void DisplayDynamicEmployees()
 
         std::cout<<"================================="<<std::endl;
     }
+}
+
+void CleanUpDynamicEmployees()
+{
+    delete[] S_employees;
+    S_employees = nullptr;
 }

@@ -362,4 +362,7 @@ void Start()
 
     // static -> 0      dynamic -> 1
     ((choice == 's') || (choice == 'S'))? BuildMenu(0) : BuildMenu(1);
+
+    if(choice == 'd')
+        CleanUpDynamicEmployees();
 }
