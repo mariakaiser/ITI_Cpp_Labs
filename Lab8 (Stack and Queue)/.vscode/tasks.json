@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C/C++: g++ build active file",
+            "command": "mkdir -p build && /usr/bin/g++ -fdiagnostics-color=always -g ./src/*.cpp -o \"${workspaceFolder}/build/${fileBasenameNoExtension}\"",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Run C++ externally",
+            "type": "shell",
+            "command": "gnome-terminal",
+            "args": [
+                "--",
+                "bash",
+                "-c",
+                "\"${workspaceFolder}/build/${fileBasenameNoExtension}\"; read -p 'Press Enter to close...'"
+            ],
+            "dependsOn": "C/C++: g++ build active file",
+            "dependsOrder": "sequence"
+        }
+    ]
+}
