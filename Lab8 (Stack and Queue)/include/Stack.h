@@ -9,6 +9,5 @@ public:
     void display();
     void push(int data);
     void pop();
-
-   
+    int top();
 };

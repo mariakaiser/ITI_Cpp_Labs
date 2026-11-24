@@ -4,7 +4,8 @@
         {
             "type": "shell",
             "label": "C/C++: g++ build active file",
-            "command": "mkdir -p build && /usr/bin/g++ -fdiagnostics-color=always -g ./src/*.cpp -o \"${workspaceFolder}/build/${fileBasenameNoExtension}\"",
+            //"command": "mkdir -p build && /usr/bin/g++ -fdiagnostics-color=always -g ./src/*.cpp -o \"${workspaceFolder}/build/${fileBasenameNoExtension}\"",
+            "command": "mkdir -p build && /usr/bin/g++ -fdiagnostics-color=always -g ./src/*.cpp -o \"${workspaceFolder}/build/${fileBasenameNoExtension}\" -lsfml-graphics -lsfml-window -lsfml-system",
             "options": {
                 "cwd": "${workspaceFolder}"
             },

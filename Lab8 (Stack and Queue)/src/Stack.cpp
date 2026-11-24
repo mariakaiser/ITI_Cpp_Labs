@@ -45,6 +45,11 @@ void Stack::pop()
     }
 }
 
+int Stack::top()
+{
+    return tail->data;
+}
+
 void Stack::display()
 {
     Node * current = this->head;
