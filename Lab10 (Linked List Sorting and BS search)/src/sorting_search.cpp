@@ -78,7 +78,9 @@ int BS(int start,int end, LinkedList l , int target)
     return -1;
 }
 
-int BinarySearch(LinkedList &l , int target) // O(n) -> more than norml O(log n) of using array
+// O(n) -> more than norml O(log n) of using array so using BS this way doesnt improve sequential search complexity O(n)
+// thats why we use BST
+int BinarySearch(LinkedList &l , int target) 
 {
     int size = l.GetCount();
     return BS(0,size,l,target);
